@@ -57,6 +57,14 @@ export const verificationTokens = pgTable(
   })
 );
 
+export const sessions = pgTable("session", {
+  sessionToken: text("sessionToken").notNull().primaryKey(),
+  userId: text("userId")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  expires: timestamp("expires", { mode: "date" }).notNull(),
+});
+
 export const room = pgTable("room", {
   userId: text("userId")
     .notNull()
@@ -66,3 +74,5 @@ export const room = pgTable("room", {
   language: text("language").notNull(),
   githubRepo: text("githubRepo"),
 });
+
+export type Room = typeof room.$inferSelect;

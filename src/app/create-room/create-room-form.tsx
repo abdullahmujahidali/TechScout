@@ -14,27 +14,41 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { createRoomAction } from "./actions";
+import { useRouter } from "next/navigation";
+import { useToast } from "@/components/ui/use-toast";
 
 const formSchema = z.object({
   name: z.string().min(1).max(50),
-  description: z.string().min(1).max(50),
+  description: z.string().min(1).max(250),
+  githubRepo: z.string().min(1).max(50),
   language: z.string().min(1).max(50),
-  githubRepo: z.string().url().optional(),
 });
 
 export function CreateRoomForm() {
-  function onSubmit(data: z.infer<typeof formSchema>) {
-    console.log(data);
-  }
+  const { toast } = useToast();
+
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
       description: "",
+      githubRepo: "",
       language: "",
     },
   });
+
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    await createRoomAction(values);
+    toast({
+      title: "Room Created",
+      description: "Your room was successfully created",
+    });
+    router.push("/");
+  }
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -45,15 +59,14 @@ export function CreateRoomForm() {
             <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
-                <Input placeholder="Example Room" {...field} />
+                <Input {...field} placeholder="Tech Scout Is Awesome" />
               </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
+              <FormDescription>This is your public room name.</FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
+
         <FormField
           control={form.control}
           name="description"
@@ -62,33 +75,18 @@ export function CreateRoomForm() {
               <FormLabel>Description</FormLabel>
               <FormControl>
                 <Input
-                  placeholder="This is a description of the example project that i am working on"
                   {...field}
+                  placeholder="Im working on a side project, come join me"
                 />
               </FormControl>
               <FormDescription>
-                Please describe what you will be coding on
+                Please describe what you are be coding on
               </FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
-        <FormField
-          control={form.control}
-          name="language"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Primary Programming Language</FormLabel>
-              <FormControl>
-                <Input placeholder="Typescript" {...field} />
-              </FormControl>
-              <FormDescription>
-                List all the primary programming languages you will be using
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+
         <FormField
           control={form.control}
           name="githubRepo"
@@ -96,15 +94,37 @@ export function CreateRoomForm() {
             <FormItem>
               <FormLabel>Github Repo</FormLabel>
               <FormControl>
-                <Input placeholder="https://github.com/" {...field} />
+                <Input
+                  {...field}
+                  placeholder="https://github.com/webdevcody/dev-finder"
+                />
               </FormControl>
               <FormDescription>
-                Please put the project link that you are working on
+                Please put a link to the project you are working on
               </FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
+
+        <FormField
+          control={form.control}
+          name="language"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Language</FormLabel>
+              <FormControl>
+                <Input {...field} placeholder="typescript, nextjs, tailwind" />
+              </FormControl>
+              <FormDescription>
+                List your programming languages, frameworks, libraries so people
+                can find you content
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
         <Button type="submit">Submit</Button>
       </form>
     </Form>
