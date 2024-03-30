@@ -11,7 +11,6 @@ export default async function Home() {
           key={room.id}
           className="flex flex-col items-center justify-center"
         >
-          <h2 className="text-2xl font-bold">{room.id}</h2>
           <p className="text-lg">{room.name}</p>
         </div>
       ))}
