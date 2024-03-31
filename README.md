@@ -1,36 +1,77 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Tech Scout
 
-## Getting Started
+Tech Scout is a pair programmer matching service that connects developers with other developers to work on projects together. The service is designed to help developers find other developers to work with on projects, and to help developers find projects to work on.
 
-First, run the development server:
+## Features
+
+- Create a profile
+- Create a room
+- Live Video Chat
+- Live Video Chat Recording
+
+## Technologies
+
+- Next.js (Frontend)
+- Next.js (Backend)
+- Shadcn & Radix UI (UI)
+- TailwindCSS (Styling)
+- Stream IO (Video Chat)
+- PostgreSQL (Database)
+
+## Installation
+
+1. Clone the repository
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+  git clone git@github.com:abdullahmujahidali/TechScout.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+  npm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+3. Start the database
 
-## Learn More
+```bash
+  docker-compose up
+```
 
-To learn more about Next.js, take a look at the following resources:
+4. Start the project
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+  npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Screenshots
 
-## Deploy on Vercel
+This is a landing page of the app that shows the features of the app.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+![Landing Page](img/landing.png)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+This is a browse page of the app that shows the rooms that are available to join in light mode.
+
+![Browse Page](img/light-room.png)
+
+This is a user rooms page that shows the rooms that the user has created.
+
+![Your Rooms](img/your-rooms.png)
+
+This is a an alert-dialog component that shows the alert message to the user.
+
+![Your Rooms](img/alert-dialog.png)
+
+This is edit room page that shows the form to edit the room.
+
+![Your Rooms](img/edit-room.png)
+
+This is a room page where user can video chat and record the video chat.
+
+![Your Rooms](img/room.png)
+
+This app is still in development and more features will be added soon.
+
+## Author
+
+Abdullah Mujahid Ali
