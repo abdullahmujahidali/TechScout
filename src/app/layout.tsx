@@ -4,6 +4,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./provider";
 import { Toaster } from "@/components/ui/toaster";
+import NextTopLoader from "nextjs-toploader";
+
 import { Header } from "./header";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -24,8 +26,9 @@ export default function RootLayout({
       <body className={inter.className}>
         <Providers>
           <Toaster />
+          <NextTopLoader />
           <Header />
-          {children}
+          <div className="container mx-auto">{children}</div>
         </Providers>
       </body>
     </html>
